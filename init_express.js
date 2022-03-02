@@ -19,7 +19,7 @@ const mongoose = require('mongoose');
 const user = 'kratoskike2';
 const password = 'pLbeq0mkvQNaSfBd';
 const dbname = 'Baraja';
-const uri2 = 'mongodb+srv://kratoskike:<password>@cluster0.ejzjw.mongodb.net/myFirstDatabase?retryWrites=true&w=majority'; //URL de conexión
+const uri2 = 'mongodb+srv://kratoskike2:pLbeq0mkvQNaSfBd@cluster0.ejzjw.mongodb.net/Users?retryWrites=true&w=majority'; //URL de conexión
 const uri3 = `mongodb+srv://${user}:${password}@cluster0.ejzjw.mongodb.net/${dbname}?retryWrites=true&w=majority`; //URL de conexión
 const uri4 = `mongodb+srv://${user}:${password}@cluster0.ejzjw.mongodb.net/${dbname}?retryWrites=true&w=majority`
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.ejzjw.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
@@ -27,7 +27,7 @@ const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.
 mongoose.connect(uri,
     { useNewUrlParser: true, useUnifiedTopology: true }
   )
-    .then(()=> console.log('Base de datos conectada'))
+    .then(()=> console.log('Base de datos barajas conectada'))
     .catch(e => console.log(e))
 
 //Motor de plantillas
@@ -40,6 +40,8 @@ app.use(express.static(__dirname+'/public'))
 //Llamadas a las rutas desde router
 app.use('/', require('./router/rutas'));
 app.use('/barajas', require('./router/barajas'));
+app.use('/registro', require('./router/registro'));
+
 
 app.use('/pokemon', require('./router/pokemon'));
 

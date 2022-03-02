@@ -1,0 +1,42 @@
+<%- include("template/cabecera") %>
+<%- include("template/header") %>
+
+
+<div class="container p-3 col-4">
+    <form action="/registro" class="needs-validation formuNuevo" method="POST" novalidate>
+        <div class="mb-3">
+            <label for="InputUser1" class="form-label">Usuario</label>
+            <input type="user" class="form-control" id="InputUser1" name="nombre" required>
+            <div id="userHelp" class="form-text">Introduce tu nombre de usuario.</div>
+            <div class="valid-feedback">
+                Correcto
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputEmail1" class="form-label">Email</label>
+            <input type="email" class="form-control" id="InputEmail1" name="email" required>
+            <div id="emailHelp" class="form-text">No compartiremos tu email con nadie</div>
+            <div id="validationServer01Feedback" class="invalid-feedback">
+                Por favor escriba una direccion de correo correcta.
+            </div>
+            <div class="valid-feedback">
+                Correcto
+            </div>
+        </div>
+        <div class="mb-3">
+            <label for="exampleInputPassword1" class="form-label">Contraseña</label>
+            <input type="password" class="form-control" id="InputPassword1" name="pass" required>
+            <div class="valid-feedback">
+                Correcto
+            </div>
+        </div>
+          <div class="mb-3 form-check">
+            <input type="checkbox" class="form-check-input" id="exampleCheck1" required>
+            <label class="form-check-label" for="exampleCheck1">Acepta los terminos de servicio</label>
+          </div>
+          <button type="submit" class="btn btn-primary" id="registro">Registrarse</button>
+    </form>
+</div>
+
+
+<%- include("template/footer") %>
