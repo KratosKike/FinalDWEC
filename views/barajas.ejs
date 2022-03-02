@@ -1,0 +1,58 @@
+<%- include("template/cabecera") %>
+      
+      <div class="container">
+        <h1><%= titulo %></h1>
+        <a class="btn btn-success btn-block my-4" href="/barajas/crear">Crear nueva Baraja</a>
+        <table class="table">
+
+            <thead class="thead-dark">
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Nombre</th>
+                    <th scope="col">Juego</th>
+                    <th scope="col">Lista</th>
+                    <th></th>
+                </tr>
+            </thead>
+            <tbody>
+                <!--Si existen elementos en el array de Barajas-->
+                <% if (arrayBarajas.length > 0) { %>
+
+                    <% arrayBarajas.forEach(baraja => { %>
+
+                        <tr>
+                            <th scope="row"><%= baraja.id %></th>
+                            <td><%= baraja.nombre %></td>
+                            <td><%= baraja.juego %></td>
+                            <!---->
+                            <td>
+                                <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<%= baraja.id %>" aria-expanded="false" aria-controls="collapseExample">
+                                    Mostrar Lista
+                                  </button>
+                                  <div class="collapse" id="collapseExample<%= baraja.id %>">
+                                    <div class="card card-body">
+                                        <%= baraja.lista %>
+                                    </div>
+                                  </div>
+                            </td>
+                            <td>
+                                <a class="btn btn-warning btn-sm" href="barajas/<%= baraja.id %>">Editar/Eliminar</a>
+                            </td>
+                        </tr>
+
+
+
+                        <% }) %>
+
+                    <% } %>
+
+            </tbody>
+
+
+        </table>
+        
+      </div>
+      
+      </button></a>
+    <!-- Bootstrap JavaScript Libraries -->
+    <%- include("template/footer") %>

@@ -1,0 +1,130 @@
+<%- include("template/cabecera") %>
+      
+      <div class="container">
+        <% if (error) { %>
+            <%= mensaje %> 
+            <a 
+                href="/pokemon"
+                class="btn btn-dark btn-block my-2"
+            >
+                Volver
+            </a>
+        <% } %>
+        <% if (!error) { %>
+
+
+            <form id="editar" data-id="<%= baraja.id %>">
+                <input type="text" value="<%= baraja.nombre %>" class="form-control my-2" name="nombre"
+                    id="nombreInput">
+                <input type="text" value="<%= baraja.juego %>" class="form-control my-2" name="juego"
+                    id="juegoeInput">
+                <div class="form-floating">
+                    <textarea class="form-control" name="lista" id="listaInput" placeholder="Leave a comment here" 
+                    id="floatingTextarea2" style="height: 100px" name="lista"><%= baraja.lista %>
+                    </textarea>
+                    <label for="floatingTextarea2"></label>
+                    </div>
+                    <button class="btn btn-warning btn-sm m-2" type="submit">
+                        Editar
+                    </button>
+
+
+            </form>
+
+
+
+
+            <table class="table">
+
+                <thead class="thead-dark">
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">Nombre</th>
+                        <th scope="col">Juego</th>
+                        <th scope="col">Lista</th>
+                        <th></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr>
+                        <th scope="row"><%= baraja.id %></th>
+                        <td><%= baraja.nombre %></td>
+                        <td><%= baraja.juego %></td>
+                        <!---->
+                        <td>
+                            <button class="btn btn-primary" type="button" data-bs-toggle="collapse" data-bs-target="#collapseExample<%= baraja.id %>" aria-expanded="false" aria-controls="collapseExample">
+                                Mostrar Lista
+                              </button>
+                              <div class="collapse" id="collapseExample<%= baraja.id %>">
+                                <div class="card card-body">
+                                    <%= baraja.lista %>
+                                </div>
+                              </div>
+                        </td>
+                        <td>
+                            <button class="btn btn-danger btn-sm" data-id="<%=baraja.id%>">
+                                Eliminar
+                            </button>
+                        </td>
+                    </tr>
+                </tbody>
+
+            </table>
+
+
+        <% } %>
+      </div>
+    <!-- Bootstrap JavaScript Libraries -->
+    <%- include("template/footer") %>
+    <script>
+        const btnEliminar = document.querySelector('.btn-danger')
+        btnEliminar.addEventListener('click', async() =>{
+           
+            console.log(btnEliminar.dataset.id)
+            console.log("test")
+            
+            try{
+                const data = await fetch(`/barajas/${btnEliminar.dataset.id}`, {
+                        method: 'delete'
+                    })
+                const res = await data.json()
+                
+                console.log(res)
+                if (res.estado) {
+                    window.location.href = '/barajas'
+                }else{
+                    console.log(res)
+                }
+
+            }catch (error){
+                console.log(error)
+            }
+        })
+
+        const formEditar = document.querySelector('#editar');
+        formEditar.addEventListener('submit', async (e) =>{
+            e.preventDefault()
+            const nombre = formEditar.elements['nombre'].value
+            
+            const juego = formEditar.elements['juego'].value
+            
+            const lista = formEditar.elements['lista'].value
+            const id = formEditar.dataset.id
+
+            const data = await fetch(`/barajas/${id}`, {
+                    method: 'PUT',
+                    headers: {
+                        'Content-Type': 'application/json'
+                    },
+                    body: JSON.stringify({ nombre, juego, lista })
+                })
+
+            const res = await data.json()
+                if(res.estado){
+                    window.location.href='/barajas'
+                }else{
+                    console.log(res)
+                }
+            
+        })
+    </script>
