@@ -19,9 +19,6 @@ const mongoose = require('mongoose');
 const user = 'kratoskike2';
 const password = 'pLbeq0mkvQNaSfBd';
 const dbname = 'Baraja';
-const uri2 = 'mongodb+srv://kratoskike2:pLbeq0mkvQNaSfBd@cluster0.ejzjw.mongodb.net/Users?retryWrites=true&w=majority'; //URL de conexión
-const uri3 = `mongodb+srv://${user}:${password}@cluster0.ejzjw.mongodb.net/${dbname}?retryWrites=true&w=majority`; //URL de conexión
-const uri4 = `mongodb+srv://${user}:${password}@cluster0.ejzjw.mongodb.net/${dbname}?retryWrites=true&w=majority`
 const uri = `mongodb+srv://${process.env.USER}:${process.env.PASSWORD}@cluster0.ejzjw.mongodb.net/${process.env.DBNAME}?retryWrites=true&w=majority`
 
 mongoose.connect(uri,
@@ -43,7 +40,6 @@ app.use('/barajas', require('./router/barajas'));
 app.use('/registro', require('./router/registro'));
 
 
-app.use('/pokemon', require('./router/pokemon'));
 
 //Rutas
 //Peticion para cuando estes en la raiz, lance x
@@ -54,10 +50,6 @@ app.get('/', (req, res) => {
 
 })
 
-//Peticion para cuando estes en /contacto, lance x
-app.get('/contacto', (req, res) => {
-    res.send('Contacto')
-  })
 
 //peticion para controlar error 404
 app.use((req, res) => {
@@ -67,8 +59,6 @@ app.use((req, res) => {
         descripcion : "Page Not Found"
     })
 })
-
-
 
 //Escuchar al puerto indicado
 app.listen(port, () => {

@@ -2,11 +2,15 @@ const express = require('express')
 const router = express.Router();
 const User = require('../models/user');
 
+//registro
+
 router.get('/reg', async (req, res) =>{
 
     res.render('registro',
         {titulo: "Registro"})
 })
+
+//cuando se registra un usuario
 
 router.post('/', async (req, res) =>{
     const body = req.body
@@ -20,6 +24,8 @@ router.post('/', async (req, res) =>{
 
     }
 })
+
+//login
 
 router.get('/log', async (req, res) =>{
 
