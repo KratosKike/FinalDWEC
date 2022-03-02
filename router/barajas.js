@@ -3,7 +3,7 @@ const router = express.Router();
 const Baraja = require('../models/baraja');
 
 
-
+//vista de barajas
 router.get('/', async (req, res) =>{
 
     try{
@@ -25,12 +25,15 @@ router.get('/', async (req, res) =>{
 
 })
 
-
+//vista creacion baraja
 router.get('/crear', (req, res) => {
     res.render('crear',
         {titulo: "Crear Baraja"}) //Nueva vista que debemos crear
 })
 
+
+
+//vista de baraja individual
 router.get('/:id', async (req, res) => { 
     const id = req.params.id
     try{
@@ -53,6 +56,8 @@ router.get('/:id', async (req, res) => {
 
 })
 
+
+//para cuando entra desde un post, guardar el dato en la bd
 router.post('/', async (req, res) =>{
     const body = req.body
     console.log(body)
@@ -66,6 +71,9 @@ router.post('/', async (req, res) =>{
     }
 })
 
+
+
+//para cuando entra desde un post, borrar
 router.delete('/:id', async (req, res) => {
     const id = req.params.id;
     console.log('id desde backend', id)
@@ -90,6 +98,8 @@ router.delete('/:id', async (req, res) => {
 
 })
 
+
+//para cuando entra desde un post, editar
 router.put('/:id', async (req, res) => {
     const id = req.params.id;
     const body = req.body;
